@@ -1,6 +1,6 @@
 package com.ps.todoapp.repository;
 
-import com.ps.todoapp.entity.User;
+import com.ps.todoapp.entity.user.User;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends ListCrudRepository<User, Long> {
-    Optional<User> findByName(String name);
+    Optional<User> findByUsername(String username);
 }
