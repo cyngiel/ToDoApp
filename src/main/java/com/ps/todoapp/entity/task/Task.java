@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
 
@@ -24,25 +26,24 @@ public class Task {
     @Id
     @GeneratedValue
     private Long id;
+    @CreationTimestamp
+    private Instant created;
+    @UpdateTimestamp
+    private Instant lastModify;
 
     private String title;
     private String description;
     private Priority priority;
-    private Instant created;
-    private Instant lastModify;
 
     public Task(String title, String description, Priority priority) {
         this.title = title;
         this.description = description;
         this.priority = priority;
-        created = Instant.now();
-        lastModify = created;
     }
 
     /**
      * Updates the current task.
-     * The method sets the title, description, priority, and the last modification timestamp
-     * based on the information from the provided taskDetails.
+     * The method sets the title, description, priority based on the information from the provided taskDetails.
      *
      * @param taskDetails The Task object containing the new task details to update. Must not be null.
      */
@@ -50,6 +51,5 @@ public class Task {
         setTitle(taskDetails.getTitle());
         setDescription(taskDetails.getDescription());
         setPriority(taskDetails.getPriority());
-        setLastModify(Instant.now());
     }
 }
