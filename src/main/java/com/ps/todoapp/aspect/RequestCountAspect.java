@@ -1,5 +1,8 @@
-package com.ps.todoapp.request;
+package com.ps.todoapp.aspect;
 
+import com.ps.todoapp.controller.task.TaskController;
+import com.ps.todoapp.entity.RequestLog;
+import com.ps.todoapp.repository.RequestLogRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,7 +15,7 @@ import java.time.Instant;
 /**
  * Aspect responsible for logging HTTP requests to task-related controller methods.
  * <p>
- * This aspect intercepts all methods in {@link com.ps.todoapp.task.TaskController} and logs them into the database.
+ * This aspect intercepts all methods in {@link TaskController} and logs them into the database.
  */
 @Aspect
 @Component
@@ -24,7 +27,7 @@ public class RequestCountAspect {
     @Autowired
     private HttpServletRequest request;
 
-    @Pointcut("execution(* com.ps.todoapp.task.TaskController.*(..))")
+    @Pointcut("execution(* com.ps.todoapp.controller.task.TaskController.*(..))")
     public void taskControllerMethods() {}
 
     @After("taskControllerMethods() && @annotation(org.springframework.web.bind.annotation.GetMapping)")

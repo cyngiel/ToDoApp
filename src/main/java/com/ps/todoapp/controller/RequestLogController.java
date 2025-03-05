@@ -1,5 +1,7 @@
-package com.ps.todoapp.request;
+package com.ps.todoapp.controller;
 
+import com.ps.todoapp.entity.RequestLog;
+import com.ps.todoapp.repository.RequestLogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

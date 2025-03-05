@@ -1,5 +1,6 @@
-package com.ps.todoapp.request;
+package com.ps.todoapp.repository;
 
+import com.ps.todoapp.entity.RequestLog;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;

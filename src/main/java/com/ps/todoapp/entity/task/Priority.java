@@ -1,4 +1,4 @@
-package com.ps.todoapp.task;
+package com.ps.todoapp.entity.task;
 
 /**
  * Enum representing different levels of priority.

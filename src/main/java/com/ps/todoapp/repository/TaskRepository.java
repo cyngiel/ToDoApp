@@ -1,5 +1,7 @@
-package com.ps.todoapp.task;
+package com.ps.todoapp.repository;
 
+import com.ps.todoapp.entity.task.Priority;
+import com.ps.todoapp.entity.task.Task;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;

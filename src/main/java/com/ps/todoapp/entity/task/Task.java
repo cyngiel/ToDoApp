@@ -1,9 +1,8 @@
-package com.ps.todoapp.task;
+package com.ps.todoapp.entity.task;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -40,7 +39,14 @@ public class Task {
         lastModify = created;
     }
 
-    void update(Task taskDetails) {
+    /**
+     * Updates the current task.
+     * The method sets the title, description, priority, and the last modification timestamp
+     * based on the information from the provided taskDetails.
+     *
+     * @param taskDetails The Task object containing the new task details to update. Must not be null.
+     */
+    public void update(Task taskDetails) {
         setTitle(taskDetails.getTitle());
         setDescription(taskDetails.getDescription());
         setPriority(taskDetails.getPriority());

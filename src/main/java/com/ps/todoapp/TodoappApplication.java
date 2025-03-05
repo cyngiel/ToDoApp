@@ -1,17 +1,16 @@
 package com.ps.todoapp;
 
-import com.ps.todoapp.task.Priority;
-import com.ps.todoapp.task.Task;
-import com.ps.todoapp.task.TaskRepository;
+import com.ps.todoapp.entity.task.Task;
+import com.ps.todoapp.repository.TaskRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-import static com.ps.todoapp.task.Priority.HIGH;
-import static com.ps.todoapp.task.Priority.LOW;
-import static com.ps.todoapp.task.Priority.MEDIUM;
+import static com.ps.todoapp.entity.task.Priority.HIGH;
+import static com.ps.todoapp.entity.task.Priority.LOW;
+import static com.ps.todoapp.entity.task.Priority.MEDIUM;
 
 
 @SpringBootApplication
