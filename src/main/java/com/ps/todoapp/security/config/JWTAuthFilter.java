@@ -1,6 +1,7 @@
 package com.ps.todoapp.security.config;
 
 
+import com.ps.todoapp.repository.UserRepository;
 import com.ps.todoapp.security.service.JWTService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -33,6 +34,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     private HandlerExceptionResolver handlerExceptionResolver;
     private JWTService jwtService;
     private UserDetailsService userDetailsService;
+    private UserRepository userRepository;
 
 
     /**

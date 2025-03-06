@@ -1,5 +1,7 @@
 package com.ps.todoapp.controller.task;
 
+import com.ps.todoapp.service.TaskCountService;
+import com.ps.todoapp.service.TaskService;
 import com.ps.todoapp.utils.EnumUtils;
 import com.ps.todoapp.entity.task.Priority;
 import com.ps.todoapp.repository.TaskRepository;
@@ -17,17 +19,20 @@ public class TaskCountController {
 
     @Autowired
     private TaskRepository repository;
+    @Autowired
+    private TaskCountService taskCountService;
 
     @GetMapping()
     public long getCount() {
-        return repository.count();
+        return taskCountService.count();
     }
 
     @GetMapping("/{priorityString}")
     public long getCountByPriority(@PathVariable("priorityString") String priorityString) {
         Priority priority = EnumUtils.getEnumFromString(Priority.class, priorityString)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Key not found: " + priorityString));
-        return repository.countByPriority(priority);
+
+        return taskCountService.countByPriority(priority);
     }
 
 }

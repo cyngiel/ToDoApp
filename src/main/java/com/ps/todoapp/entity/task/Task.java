@@ -1,8 +1,12 @@
 package com.ps.todoapp.entity.task;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ps.todoapp.entity.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,6 +34,10 @@ public class Task {
     private Instant created;
     @UpdateTimestamp
     private Instant lastModify;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
     private String title;
     private String description;

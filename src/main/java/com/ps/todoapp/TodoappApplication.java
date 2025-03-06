@@ -1,7 +1,9 @@
 package com.ps.todoapp;
 
 import com.ps.todoapp.entity.task.Task;
+import com.ps.todoapp.entity.user.User;
 import com.ps.todoapp.entity.user.UserDto;
+import com.ps.todoapp.entity.user.UserRole;
 import com.ps.todoapp.repository.TaskRepository;
 import com.ps.todoapp.repository.UserRepository;
 import com.ps.todoapp.service.UserAuthenticationService;
@@ -10,10 +12,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static com.ps.todoapp.entity.task.Priority.HIGH;
 import static com.ps.todoapp.entity.task.Priority.LOW;
 import static com.ps.todoapp.entity.task.Priority.MEDIUM;
+import static com.ps.todoapp.entity.user.UserRole.ADMIN;
 
 
 @SpringBootApplication
@@ -25,12 +29,20 @@ public class TodoappApplication {
     }
 
     @Bean
-    public CommandLineRunner run(TaskRepository repository, UserAuthenticationService userAuthenticationService) {
+    public CommandLineRunner run(TaskRepository repository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         return (args -> {
             System.out.println("Inserting test data");
             insertTestData(repository);
-            userAuthenticationService.signup(new UserDto("test", "test"));
+            insertTestUsers(userRepository, passwordEncoder);
         });
+    }
+
+    private static void insertTestUsers(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        User user = new User("test", passwordEncoder.encode("test"));
+        userRepository.save(user);
+        User admin = new User("admin", passwordEncoder.encode("admin"));
+        admin.setRole(ADMIN);
+        userRepository.save(admin);
     }
 
     void insertTestData(TaskRepository repository) {

@@ -5,6 +5,7 @@ import com.ps.todoapp.entity.task.Task;
 import org.springframework.data.repository.ListCrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Interface for performing CRUD operations on {@link Task} entities.
@@ -21,5 +22,11 @@ public interface TaskRepository extends ListCrudRepository<Task, Long> {
     List<Task> findTaskByTitle(String title);
     List<Task> findAllByPriority(Priority priority);
 
+    Optional<Task> findTaskByIdAndUserId(long id, long userId);
+    List<Task> findAllByUserId(long userId);
+    List<Task> findAllByUserIdAndPriority(long userId, Priority priority);
+
     long countByPriority(Priority priority);
+    long countByUserId(long userId);
+    long countByUserIdAndPriority(long userId, Priority priority);
 }
