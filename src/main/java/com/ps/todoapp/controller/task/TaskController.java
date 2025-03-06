@@ -3,8 +3,7 @@ package com.ps.todoapp.controller.task;
 import com.ps.todoapp.entity.task.Priority;
 import com.ps.todoapp.entity.task.SortBy;
 import com.ps.todoapp.entity.task.Task;
-import com.ps.todoapp.repository.TaskRepository;
-import com.ps.todoapp.service.TaskService;
+import com.ps.todoapp.service.task.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,13 +27,11 @@ import java.util.List;
 public class TaskController {
 
     @Autowired
-    private TaskRepository repository;
-    @Autowired
     private TaskService taskService;
 
     @GetMapping()
     public List<Task> getAll(@RequestParam(required = false) Priority priority, @RequestParam(required = false) SortBy sortBy, @RequestParam(required = false) boolean desc, @AuthenticationPrincipal UserDetails userDetails) {
-        return taskService.getAll(userDetails, priority,sortBy,desc);
+        return taskService.getAll(userDetails, priority, sortBy, desc);
     }
 
     @GetMapping("/{id}")
@@ -51,7 +48,7 @@ public class TaskController {
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable("id") Long id, @RequestBody Task taskDetails) {
         Task updated = taskService.updateTask(id, taskDetails);
-        if(updated == null) {
+        if (updated == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 

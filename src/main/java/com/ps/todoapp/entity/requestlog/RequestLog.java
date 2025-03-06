@@ -1,4 +1,4 @@
-package com.ps.todoapp.entity;
+package com.ps.todoapp.entity.requestlog;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

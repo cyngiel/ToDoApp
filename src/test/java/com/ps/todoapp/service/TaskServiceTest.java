@@ -6,6 +6,7 @@ import com.ps.todoapp.entity.task.Task;
 import com.ps.todoapp.entity.user.User;
 import com.ps.todoapp.repository.TaskRepository;
 import com.ps.todoapp.repository.UserRepository;
+import com.ps.todoapp.service.task.TaskService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

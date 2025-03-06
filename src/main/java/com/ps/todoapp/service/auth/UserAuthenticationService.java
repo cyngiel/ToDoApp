@@ -1,7 +1,7 @@
-package com.ps.todoapp.service;
+package com.ps.todoapp.service.auth;
 
 import com.ps.todoapp.entity.user.User;
-import com.ps.todoapp.entity.user.UserDto;
+import com.ps.todoapp.entity.user.UserDTO;
 import com.ps.todoapp.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +18,7 @@ public class UserAuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public User signup(UserDto userDto) {
+    public User signup(UserDTO userDto) {
         User user = new User(userDto.username(), passwordEncoder.encode(userDto.password()));
         if (userRepository.findByUsername(userDto.username()).isPresent()) {
             return null;
@@ -26,7 +26,7 @@ public class UserAuthenticationService {
         return userRepository.save(user);
     }
 
-    public User authenticate(UserDto userDto) {
+    public User authenticate(UserDTO userDto) {
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userDto.username(), userDto.password()));
 

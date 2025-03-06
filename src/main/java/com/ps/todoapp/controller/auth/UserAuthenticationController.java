@@ -1,10 +1,10 @@
-package com.ps.todoapp.security.controller;
+package com.ps.todoapp.controller.auth;
 
-import com.ps.todoapp.entity.user.UserDto;
+import com.ps.todoapp.entity.user.UserDTO;
 import com.ps.todoapp.security.AuthTokenResponse;
 import com.ps.todoapp.entity.user.User;
 import com.ps.todoapp.security.service.JWTService;
-import com.ps.todoapp.service.UserAuthenticationService;
+import com.ps.todoapp.service.auth.UserAuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,7 +25,7 @@ public class UserAuthenticationController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<User> signup(@RequestBody UserDto userDto) {
+    public ResponseEntity<User> signup(@RequestBody UserDTO userDto) {
         User user = userAuthenticationService.signup(userDto);
         if (user == null) {
             throw new ResponseStatusException(CONFLICT, "User already exists");
@@ -34,7 +34,7 @@ public class UserAuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthTokenResponse> authenticate(@RequestBody UserDto userDto) {
+    public ResponseEntity<AuthTokenResponse> authenticate(@RequestBody UserDTO userDto) {
         User user = userAuthenticationService.authenticate(userDto);
         String jwt = jwtService.generateToken(user);
 

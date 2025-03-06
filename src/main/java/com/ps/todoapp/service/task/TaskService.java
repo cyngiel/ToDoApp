@@ -1,4 +1,4 @@
-package com.ps.todoapp.service;
+package com.ps.todoapp.service.task;
 
 import com.ps.todoapp.entity.task.Priority;
 import com.ps.todoapp.entity.task.SortBy;
@@ -24,24 +24,32 @@ public class TaskService {
 
     public List<Task> getAll(UserDetails userDetails, Priority priority, SortBy sortBy, boolean desc) {
         User user = userRepository.findByUsername(userDetails.getUsername()).orElseThrow();
+        List<Task> tasks = fetchTasks(priority, user);
+        handleSorting(sortBy, desc, tasks);
+
+        return tasks;
+    }
+
+    private static void handleSorting(SortBy sortBy, boolean desc, List<Task> tasks) {
+        if (sortBy != null) {
+            sort(sortBy, desc, tasks);
+        }
+    }
+
+    private List<Task> fetchTasks(Priority priority, User user) {
         List<Task> tasks;
         if (priority != null) {
             tasks = taskRepository.findAllByUserIdAndPriority(user.getId(), priority);
         } else {
             tasks = taskRepository.findAllByUserId(user.getId());
         }
-
-        if (sortBy != null) {
-            sort(sortBy, desc, tasks);
-        }
-
         return tasks;
     }
 
     public void createTasks(List<Task> tasks) {
         User user = getUserFromContext();
         tasks.forEach(task -> task.setUser(user));
-        tasks.forEach(taskRepository::save);
+        taskRepository.saveAll(tasks);
     }
 
     public Task updateTask(long id, Task taskDetails) {

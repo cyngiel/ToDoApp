@@ -1,7 +1,7 @@
 package com.ps.todoapp.aspect;
 
 import com.ps.todoapp.controller.task.TaskController;
-import com.ps.todoapp.entity.RequestLog;
+import com.ps.todoapp.entity.requestlog.RequestLog;
 import com.ps.todoapp.repository.RequestLogRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.annotation.After;

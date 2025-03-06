@@ -1,4 +1,4 @@
-package com.ps.todoapp.service;
+package com.ps.todoapp.service.task;
 
 import com.ps.todoapp.entity.task.Priority;
 import com.ps.todoapp.repository.TaskRepository;

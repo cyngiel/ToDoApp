@@ -1,11 +1,10 @@
-package com.ps.todoapp.appinfo;
+package com.ps.todoapp.service.appinfo;
 
+import com.ps.todoapp.entity.appinfo.AppInfoDTO;
 import com.ps.todoapp.repository.RequestLogRepository;
 import com.ps.todoapp.repository.TaskRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 
@@ -18,19 +17,15 @@ import static org.springframework.http.HttpMethod.PATCH;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
-@RestController
-@RequestMapping("/info")
-public class AppInfoController {
+@Service
+@AllArgsConstructor
+public class AppInfoService {
 
-    @Autowired
     private TaskRepository taskRepository;
-
-    @Autowired
     private RequestLogRepository requestLogRepository;
 
-    @GetMapping()
-    public AppInfo getInfo() {
-        return AppInfo.builder()
+    public AppInfoDTO getInfo(){
+        return AppInfoDTO.builder()
                 .timestamp(Instant.now())
                 .totalTasks(taskRepository.count())
                 .highPriorityTasks(taskRepository.countByPriority(HIGH))

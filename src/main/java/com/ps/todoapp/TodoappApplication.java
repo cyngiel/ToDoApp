@@ -2,11 +2,8 @@ package com.ps.todoapp;
 
 import com.ps.todoapp.entity.task.Task;
 import com.ps.todoapp.entity.user.User;
-import com.ps.todoapp.entity.user.UserDto;
-import com.ps.todoapp.entity.user.UserRole;
 import com.ps.todoapp.repository.TaskRepository;
 import com.ps.todoapp.repository.UserRepository;
-import com.ps.todoapp.service.UserAuthenticationService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
