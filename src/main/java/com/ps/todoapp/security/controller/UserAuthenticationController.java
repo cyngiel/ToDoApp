@@ -4,7 +4,7 @@ import com.ps.todoapp.entity.user.UserDto;
 import com.ps.todoapp.security.AuthTokenResponse;
 import com.ps.todoapp.entity.user.User;
 import com.ps.todoapp.security.service.JWTService;
-import com.ps.todoapp.security.service.UserAuthenticationService;
+import com.ps.todoapp.service.UserAuthenticationService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

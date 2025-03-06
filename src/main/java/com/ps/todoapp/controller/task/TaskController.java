@@ -1,8 +1,10 @@
 package com.ps.todoapp.controller.task;
 
 import com.ps.todoapp.entity.task.Priority;
+import com.ps.todoapp.entity.task.SortBy;
 import com.ps.todoapp.entity.task.Task;
 import com.ps.todoapp.repository.TaskRepository;
+import com.ps.todoapp.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,14 +27,12 @@ public class TaskController {
 
     @Autowired
     private TaskRepository repository;
+    @Autowired
+    private TaskService taskService;
 
     @GetMapping()
-    public List<Task> getAll(@RequestParam(required = false) Priority priority) {
-        if(priority == null) {
-            return repository.findAll();
-        }
-
-        return repository.findAllByPriority(priority);
+    public List<Task> getAll(@RequestParam(required = false) Priority priority, @RequestParam(required = false) SortBy sortBy, @RequestParam(required = false) boolean desc) {
+        return taskService.getAll(priority,sortBy,desc);
     }
 
     @GetMapping("/{id}")
@@ -48,15 +48,12 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable("id") Long id, @RequestBody Task taskDetails) {
-        Task task = repository.findById(id).orElse(null);
-        if (task == null) {
+        Task updated = taskService.updateTask(id, taskDetails);
+        if(updated == null) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
 
-        task.update(taskDetails);
-        repository.save(task);
-
-        return new ResponseEntity<>(task, HttpStatus.OK);
+        return new ResponseEntity<>(taskDetails, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

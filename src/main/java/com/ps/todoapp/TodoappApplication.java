@@ -1,7 +1,10 @@
 package com.ps.todoapp;
 
 import com.ps.todoapp.entity.task.Task;
+import com.ps.todoapp.entity.user.UserDto;
 import com.ps.todoapp.repository.TaskRepository;
+import com.ps.todoapp.repository.UserRepository;
+import com.ps.todoapp.service.UserAuthenticationService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,10 +25,11 @@ public class TodoappApplication {
     }
 
     @Bean
-    public CommandLineRunner run(TaskRepository repository) {
+    public CommandLineRunner run(TaskRepository repository, UserAuthenticationService userAuthenticationService) {
         return (args -> {
             System.out.println("Inserting test data");
             insertTestData(repository);
+            userAuthenticationService.signup(new UserDto("test", "test"));
         });
     }
 

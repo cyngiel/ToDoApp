@@ -1,4 +1,4 @@
-package com.ps.todoapp.security.service;
+package com.ps.todoapp.service;
 
 import com.ps.todoapp.entity.user.User;
 import com.ps.todoapp.entity.user.UserDto;
