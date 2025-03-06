@@ -4,22 +4,40 @@
 
 This is a **Todo** application designed to manage tasks.
 
-## Key Features:
+## 🎉 Key Features:
 - **Add Tasks**: Create new tasks by providing a title, description, and setting the task's priority (High, Medium, or Low).
-- **View Tasks**: Browse through your tasks, view their details.
-- **Modify and Delete Tasks**: Edit the title, description, or priority level of any existing task.
+- **View Tasks**: Browse through tasks and view their details.
+- **Modify and Delete Tasks**: Edit the title, description, or priority level.
 - **Request Counting**: Track the number of requests made to the API
+- **Security:** Secured by JWT token and User Roles
 
-## ⚙️Technologies Used
+## ⚙️ Technologies Used
 - **Spring Boot** for the backend
 - **Swagger UI** for API documentation
 - **Spring Data** for database access
-- **Spring Security** for security
+- **Spring Security** for security and role management
 - **JSON Web Token** for authentication
+- **Docker** for deployment on a Docker container
 - **H2 Database** for in-memory storage (can be replaced with MySQL in production)
 - **Lombok** for reducing boilerplate code
 
 ---
+
+## 🚀 Getting Started
+
+To run the application on your machine using Docker, run the following commands in the project root directory::
+
+### 1. Build the Docker image
+
+```bash
+docker build --tag=todoapp:latest .
+```
+
+### 2. Run the Docker container
+```bash
+docker run -p 8080:8080 todoapp
+```
+
 
 ## 📄 API Documentation
 
@@ -42,13 +60,17 @@ To Sign in and obtain a token for accessing protected resources, send a `POST` r
 
 
 
-## 🔑 Test User (For Testing Purposes)
+## 🔑 Test Users For Testing Purposes
 
-For convenience, a **test user** is pre-configured so you can start testing without creating a new account.
+For convenience, a **test user** and **admin** is pre-configured so you can start testing without creating a new account.
 
 **Test User Credentials:**
 - **Username**: `test`
 - **Password**: `test`
+
+**Admin Credentials:**
+- **Username**: `admin`
+- **Password**: `admin`
 
 Log in using these credentials at the `/login` endpoint to receive a JWT token for testing.
 
@@ -59,6 +81,7 @@ The following endpoints require authentication. To access these, you must provid
 ### **Protected Endpoints**:
 - `/tasks/**`: Requires authentication to access task-related resources.
 - `/logs/**`: Requires authentication to access request-log-related resources.
+- `/admin/tasks`: Requires authentication and **admin** role to view and manage all tasks.
 
 ### **Public Endpoints**:
 The following endpoints do **not** require authentication and are publicly accessible:
@@ -115,6 +138,13 @@ There is an `/info` endpoint available that provides useful statistics about the
 - **Task Count**: Displays the total number of tasks in the system.
 - **Priority Breakdown**: Shows how many tasks exist for each priority level (High, Medium, Low).
 - **Request Count**: Provides a count of how many requests have been made for each HTTP method (GET, POST, PUT, PATCH, DELETE) to the `/task` endpoint.
+
+---
+## ⚠️ **Important**: The application uses a **test-mode database** 
+
+- Database setup is designed to make testing easier and cleaner by resetting the environment on each run.
+- The database is **reset** every time the application stops. This means that once the app shuts down, any tasks, users, or other data will be erased.
+- Upon each launch of the application, the database is populated with **test data**. This includes predefined tasks and test users, for a quick start interacting with the app without needing to manually add data.
 
 ---
 © 2025 Piotr Stefanski.
